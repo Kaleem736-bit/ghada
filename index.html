@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصتي الرياضية - الكسور العشرية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شاشة التسجيل -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-box animate__animated animate__fadeIn">
+            <div class="auth-header">
+                <img src="logo.png" alt="منصتي الرياضية" class="logo">
+                <h2>مرحباً بكِ في عالم الكسور العشرية!</h2>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" id="login-tab">تسجيل الدخول</button>
+                <button class="tab-btn" id="register-tab">إنشاء حساب</button>
+            </div>
+            
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">كلمة المرور</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="auth-btn">دخول</button>
+            </form>
+            
+            <form id="register-form" class="auth-form hidden">
+                <div class="form-group">
+                    <label for="register-name">اسم الطالبة</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">البريد الإلكتروني</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">كلمة المرور</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-avatar">اختيار الصورة الشخصية</label>
+                    <div class="avatar-options">
+                        <div class="avatar-option selected" data-avatar="1"><img src="avatar1.png" alt="Avatar 1"></div>
+                        <div class="avatar-option" data-avatar="2"><img src="avatar2.png" alt="Avatar 2"></div>
+                        <div class="avatar-option" data-avatar="3"><img src="avatar3.png" alt="Avatar 3"></div>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn">إنشاء حساب</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>بالدخول أنتِ توافقين على <a href="#">شروط الاستخدام</a> و<a href="#">سياسة الخصوصية</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة الرئيسية (ستظهر بعد التسجيل) -->
+    <div class="main-container hidden" id="main-container">
+        <!-- شريط التنقل -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <img src="logo.png" alt="منصتي الرياضية" class="logo">
+                <span class="welcome-msg">مرحباً بكِ، <span id="username-display">آية</span>!</span>
+            </div>
+            <div class="nav-right">
+                <div class="profile">
+                    <img id="user-avatar" src="avatar1.png" alt="صورة المستخدمة">
+                    <span id="user-points">0 نقطة</span>
+                </div>
+                <button class="logout-btn">تسجيل خروج</button>
+            </div>
+        </nav>
+        
+        <!-- محتوى الصفحة الرئيسية -->
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <h1 class="animate__animated animate__fadeInDown">الوحدة الثالثة: العمليات على الكسور العشرية</h1>
+                    <p class="animate__animated animate__fadeInUp animate__delay-1s">لنتعلم معاً بطريقة ممتعة!</p>
+                    <div class="progress-container animate__animated animate__fadeInUp animate__delay-2s">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% مكتمل</span>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="math-girl.png" alt="طالبة تدرس الرياضيات" class="animate__animated animate__fadeInRight">
+                </div>
+            </div>
+            
+            <div class="lessons-container">
+                <div class="lesson-card" id="multiplication-card" data-lesson="multiplication">
+                    <div class="card-header">
+                        <div class="lesson-icon">×</div>
+                        <div class="lesson-badge">جديد</div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ضرب الكسور العشرية</h3>
+                        <p>تعلمي كيفية ضرب الكسور العشرية بسهولة</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stars">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                        </div>
+                        <button class="start-lesson-btn">ابدأ التعلم</button>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                
+                <div class="lesson-card" id="division-card" data-lesson="division">
+                    <div class="card-header">
+                        <div class="lesson-icon">÷</div>
+                    </div>
+                    <div class="card-body">
+                        <h3>قسمة الكسور العشرية</h3>
+                        <p>إتقان عملية القسمة مع تمارين تفاعلية</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stars">
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                        </div>
+                        <button class="start-lesson-btn">ابدأ التعلم</button>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                
+                <div class="lesson-card" id="measurement-card" data-lesson="measurement">
+                    <div class="card-header">
+                        <div class="lesson-icon">📏</div>
+                    </div>
+                    <div class="card-body">
+                        <h3>القياس وتطبيقات العمليات</h3>
+                        <p>تطبيقات عملية في الحياة اليومية</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stars">
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                        </div>
+                        <button class="start-lesson-btn">ابدأ التعلم</button>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+            </div>
+            
+            <div class="achievements-section">
+                <h2>إنجازاتكِ</h2>
+                <div class="achievements-grid">
+                    <div class="achievement locked">
+                        <div class="achievement-icon">🏆</div>
+                        <h4>أميرة الضرب</h4>
+                        <p>أكملي درس الضرب</p>
+                    </div>
+                    <div class="achievement locked">
+                        <div class="achievement-icon">🎓</div>
+                        <h4>خبيرة القسمة</h4>
+                        <p>حلّي جميع تمارين القسمة</p>
+                    </div>
+                    <div class="achievement locked">
+                        <div class="achievement-icon">✨</div>
+                        <h4>نجمة القياس</h4>
+                        <p>احرزي 100% في تطبيقات القياس</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- تذييل الصفحة -->
+        <footer class="main-footer">
+            <p>© 2023 منصتي الرياضية - تصميم خاص بالطالبات</p>
+            <div class="social-links">
+                <a href="#"><img src="facebook-icon.png" alt="فيسبوك"></a>
+                <a href="#"><img src="twitter-icon.png" alt="تويتر"></a>
+                <a href="#"><img src="instagram-icon.png" alt="إنستغرام"></a>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- صفحة الدرس (ستظهر عند اختيار درس) -->
+    <div class="lesson-container hidden" id="lesson-container">
+        <div class="lesson-header">
+            <button class="back-btn">← العودة</button>
+            <h2 id="lesson-title">ضرب الكسور العشرية</h2>
+            <div class="lesson-progress">
+                <span id="lesson-progress-text">0/6 تمارين</span>
+                <div class="progress-bar small">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lesson-content">
+            <div class="explanation-section">
+                <h3>شرح الدرس</h3>
+                <div class="explanation-content" id="explanation-content">
+                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                </div>
+                <div class="explanation-animation">
+                    <div class="animation-box" id="animation-box">
+                        <!-- سيتم ملؤه بالجافاسكريبت -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solved-exercises-section">
+                <h3>تمارين محلولة</h3>
+                <div class="solved-exercises" id="solved-exercises">
+                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                </div>
+            </div>
+            
+            <div class="practice-section">
+                <h3>حان وقت التمرين!</h3>
+                <div class="exercise-container" id="exercise-container">
+                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                </div>
+                
+                <div class="calculator-help hidden" id="calculator-help">
+                    <h4>آلة حاسبة مساعدة</h4>
+                    <div class="calculator-input">
+                        <input type="text" id="calculator-expression" placeholder="أدخلي المسألة هنا، مثلاً: 0.5 × 0.3">
+                        <button id="calculate-btn">احسبي</button>
+                    </div>
+                    <div class="calculator-options">
+                        <label>
+                            <input type="checkbox" id="show-steps-checkbox">
+                            أريدي خطوات الحل أيضًا
+                        </label>
+                    </div>
+                    <div class="calculator-result hidden" id="calculator-result">
+                        <!-- سيتم ملؤه بالجافاسكريبت -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- العناصر العائمة -->
+    <div class="floating-elements">
+        <!-- سيتم إنشاؤها بالجافاسكريبت -->
+    </div>
+    
+    <!-- الإشعارات -->
+    <div class="notification-container" id="notification-container">
+        <!-- سيتم ملؤه بالجافاسكريبت -->
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
