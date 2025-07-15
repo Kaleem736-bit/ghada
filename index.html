@@ -3,270 +3,3220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصتي الرياضية - الكسور العشرية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>منصة د.غادة للكسور العشرية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        :root {
+            --pink-light: #fff0f6;
+            --pink: #ff6b9d;
+            --pink-dark: #d44d7c;
+            --purple-light: #f3f0ff;
+            --purple: #9d6bff;
+            --purple-dark: #7a4dd4;
+            --blue-light: #f0f9ff;
+            --blue: #6bd4ff;
+            --blue-dark: #4da6d4;
+            --green-light: #f0fff4;
+            --green: #6bff9d;
+            --green-dark: #4dd47a;
+            --yellow-light: #fffdf0;
+            --yellow: #ffd46b;
+            --yellow-dark: #d4b04d;
+            --dark: #3a2a4a;
+            --light: #fff9fb;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        /* نظام الدخول والتسجيل */
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+            background: url('https://i.ibb.co.com/8XqY7vN/math-pattern.png') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255,107,157,0.9), rgba(157,107,255,0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-left::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co.com/4dGXvJg/math-icons.png') no-repeat center center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .auth-left-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background-color: white;
+            position: relative;
+        }
+        
+        .auth-right::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co.com/4dGXvJg/math-icons.png') no-repeat center center;
+            opacity: 0.05;
+        }
+        
+        .auth-form {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .auth-form h2 {
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--pink);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.2);
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(157, 107, 255, 0.3);
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(157, 107, 255, 0.4);
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .auth-switch a {
+            color: var(--pink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* الباركود التجريبي */
+        .demo-barcode-container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-barcode-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+        }
+        
+        /* الواجهة الرئيسية بعد التسجيل */
+        .main-container {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--purple);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--pink);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(157, 107, 255, 0.3);
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+        
+        .welcome-message {
+            background-color: white;
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 3px solid var(--pink-light);
+        }
+        
+        .welcome-message::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+        }
+        
+        .welcome-message h1 {
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .welcome-message h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 2px;
+        }
+        
+        .welcome-message p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .lessons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .lesson-card {
+            background-color: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            border-top: 8px solid var(--pink);
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .lesson-card:nth-child(1) {
+            border-top-color: var(--pink);
+        }
+        
+        .lesson-card:nth-child(2) {
+            border-top-color: var(--purple);
+        }
+        
+        .lesson-card:nth-child(3) {
+            border-top-color: var(--blue);
+        }
+        
+        .lesson-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card:nth-child(1) .lesson-tag {
+            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        }
+        
+        .lesson-card:nth-child(2) .lesson-tag {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+        }
+        
+        .lesson-card:nth-child(3) .lesson-tag {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+        }
+        
+        .lesson-image-container {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lesson-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .lesson-card:hover .lesson-image {
+            transform: scale(1.1);
+        }
+        
+        .lesson-content {
+            padding: 2rem;
+        }
+        
+        .lesson-title {
+            font-size: 1.6rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .lesson-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 3px;
+        }
+        
+        .lesson-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .start-button {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(157, 107, 255, 0.3);
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(157, 107, 255, 0.4);
+        }
+        
+        .start-button i {
+            font-size: 1.2rem;
+        }
+        
+        /* صفحة الملف الشخصي */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .profile-content {
+            background-color: white;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            background-color: #f5f5f5;
+            color: var(--pink);
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(157, 107, 255, 0.4);
+            border: 4px solid white;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-email {
+            color: #777;
+            font-size: 1.1rem;
+        }
+        
+        .barcode-section {
+            text-align: center;
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--purple-light), white);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed var(--purple-light);
+        }
+        
+        .barcode-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+        }
+        
+        .barcode-title {
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .barcode-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 3px;
+        }
+        
+        #userBarcode {
+            margin: 1.5rem auto;
+            padding: 15px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .barcode-instructions {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .progress-section {
+            margin-top: 3rem;
+        }
+        
+        .progress-title {
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.4rem;
+            position: relative;
+        }
+        
+        .progress-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 3px;
+        }
+        
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-item h4 {
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .progress-percent {
+            color: var(--purple);
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                            rgba(255,255,255,0.1), 
+                            rgba(255,255,255,0.3), 
+                            rgba(255,255,255,0.1));
+            animation: progressShine 2s infinite linear;
+        }
+        
+        @keyframes progressShine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* صفحة الدرس */
+        .lesson-page {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-button {
+            background-color: var(--light);
+            border: 2px solid var(--pink-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            color: var(--purple);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .back-button:hover {
+            background-color: var(--pink-light);
+            transform: translateX(-5px);
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(157, 107, 255, 0.4);
+            z-index: 999;
+            transition: all 0.5s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(157, 107, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(157, 107, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(157, 107, 255, 0);
+            }
+        }
+        
+        .lesson-title-page {
+            color: var(--purple);
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .lesson-title-page::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 5px;
+        }
+        
+        .lesson-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #f0f0f0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .lesson-tab {
+            padding: 1.2rem 2.5rem;
+            cursor: pointer;
+            position: relative;
+            color: #777;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lesson-tab:hover {
+            color: var(--purple);
+        }
+        
+        .lesson-tab.active {
+            color: var(--purple);
+            font-weight: bold;
+        }
+        
+        .lesson-tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 4px;
+            animation: tabUnderline 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes tabUnderline {
+            from {
+                width: 0;
+            }
+            to {
+                width: 80%;
+            }
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .explanation-section {
+            background-color: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .explanation-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+        }
+        
+        .section-title {
+            color: var(--purple);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink), var(--purple));
+            border-radius: 4px;
+        }
+        
+        .section-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        
+        .example-item {
+            background-color: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            border: 2px solid var(--pink-light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        
+        .example-item::before {
+            content: "مثال";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(157, 107, 255, 0.3);
+            z-index: 2;
+        }
+        
+        .example-title {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .example-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .example-solution {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-right: 4px solid var(--purple);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .step {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .step::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--pink);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: var(--purple);
+        }
+        
+        .exercise-section {
+            background-color: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exercise-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--blue));
+        }
+        
+        .exercise-item {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background-color: var(--light);
+            border: 2px solid var(--pink-light);
+        }
+        
+        .exercise-question {
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .exercise-question-number {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(157, 107, 255, 0.3);
+        }
+        
+        .exercise-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .option-btn {
+            padding: 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .option-btn.correct {
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            color: white;
+            border-color: var(--green);
+            animation: correctAnswer 0.5s ease;
+            box-shadow: 0 8px 25px rgba(107, 255, 157, 0.4);
+        }
+        
+        @keyframes correctAnswer {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .option-btn.wrong {
+            background: linear-gradient(135deg, #ff6b6b, #d44d4d);
+            color: white;
+            border-color: #ff6b6b;
+            animation: wrongAnswer 0.5s ease;
+        }
+        
+        @keyframes wrongAnswer {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            20%, 60% {
+                transform: translateX(-5px);
+            }
+            40%, 80% {
+                transform: translateX(5px);
+            }
+        }
+        
+        .feedback-message {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feedback-message::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--pink), var(--purple));
+        }
+        
+        .correct-feedback {
+            background-color: rgba(107, 255, 157, 0.1);
+            color: #1a7d3e;
+            border: 1px solid rgba(107, 255, 157, 0.3);
+        }
+        
+        .wrong-feedback {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: #7d1a1a;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .help-section {
+            margin-top: 1.5rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .help-btn {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(107, 212, 255, 0.3);
+        }
+        
+        .help-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 212, 255, 0.4);
+        }
+        
+        .calculator-help {
+            background-color: var(--blue-light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            border: 2px dashed var(--blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calculator-help::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+        }
+        
+        .calculator-title {
+            color: var(--blue-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .calculator-input {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #d1e9ff;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .calculator-input:focus {
+            border-color: var(--blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(107, 212, 255, 0.3);
+        }
+        
+        .calculator-btn {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(107, 212, 255, 0.3);
+        }
+        
+        .calculator-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 212, 255, 0.4);
+        }
+        
+        .calculator-result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 15px;
+            border-left: 4px solid var(--blue);
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .show-steps-btn {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(157, 107, 255, 0.3);
+        }
+        
+        .show-steps-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(157, 107, 255, 0.4);
+        }
+        
+        .steps-solution {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-right: 4px solid var(--purple);
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* رسالة التهنئة */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1001;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .celebration-content {
+            background: linear-gradient(135deg, rgba(255,107,157,0.9), rgba(157,107,255,0.9));
+            padding: 3rem;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .celebration h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .celebration p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .celebration-btn {
+            background-color: white;
+            color: var(--purple);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .celebration-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--pink);
+            animation: confettiFall 5s infinite linear;
+            z-index: -1;
+        }
+        
+        .confetti:nth-child(3n) {
+            background-color: var(--purple);
+        }
+        
+        .confetti:nth-child(3n+1) {
+            background-color: var(--blue);
+        }
+        
+        .confetti:nth-child(3n+2) {
+            background-color: var(--green);
+        }
+        
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #777;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .creator {
+            color: var(--pink);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        /* تأثيرات الشكل العائمة */
+        .floating-shapes .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+        
+        .shape-circle {
+            border-radius: 50%;
+        }
+        
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 50px solid var(--pink);
+        }
+        
+        .shape-square {
+            border-radius: 10px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* تأثيرات الحركة */
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* تأثيرات النص */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* جداول */
+        .math-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .math-table th {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            padding: 1.2rem;
+            text-align: right;
+        }
+        
+        .math-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: right;
+        }
+        
+        .math-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .math-table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        /* رسوم متحركة للدروس */
+        .animated-math {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .decimal-animation {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .decimal-point {
+            position: relative;
+            display: inline-block;
+            animation: decimalPulse 1.5s infinite;
+        }
+        
+        @keyframes decimalPulse {
+            0%, 100% {
+                transform: scale(1);
+                color: var(--dark);
+            }
+            50% {
+                transform: scale(1.3);
+                color: var(--pink);
+            }
+        }
+        
+        /* تأثيرات خاصة للدروس */
+        .operation-sign {
+            font-weight: bold;
+            color: var(--purple);
+            animation: pulse 2s infinite;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+        
+        .result-box {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: var(--green-light);
+            border: 2px solid var(--green);
+            font-weight: bold;
+            color: var(--dark);
+            animation: bounce 2s infinite;
+        }
+        
+        /* تأثيرات دخول */
+        .slide-in {
+            animation: slideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-left, .auth-right {
+                padding: 2rem 1rem;
+            }
+            
+            .lessons-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .exercise-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .lesson-title-page {
+                font-size: 1.8rem;
+            }
+            
+            .lesson-tab {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .celebration h2 {
+                font-size: 2rem;
+            }
+            
+            .celebration p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- شاشة التسجيل -->
-    <div class="auth-container" id="auth-container">
-        <div class="auth-box animate__animated animate__fadeIn">
-            <div class="auth-header">
-                <img src="logo.png" alt="منصتي الرياضية" class="logo">
-                <h2>مرحباً بكِ في عالم الكسور العشرية!</h2>
+    <!-- نظام الدخول والتسجيل -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">منصة د.غادة للرياضيات</h1>
+                <p style="font-size: 1.3rem; margin-bottom: 2rem;">تعلّم الكسور العشرية بطريقة سهلة وممتعة!</p>
+                
+                <div class="demo-barcode-container">
+                    <p style="margin-bottom: 1rem; font-weight: bold; color: var(--purple);">جرب مسح الباركود التجريبي:</p>
+                    <svg id="demoBarcode"></svg>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">بعد التسجيل، ستحصلين على باركود خاص بكِ للدخول السريع</p>
+                </div>
+                
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                    <div style="width: 50px; height: 50px; background-color: var(--pink); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; animation: bounce 2s infinite;">1</div>
+                    <div style="width: 50px; height: 50px; background-color: var(--purple); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; animation: bounce 2s infinite 0.2s;">2</div>
+                    <div style="width: 50px; height: 50px; background-color: var(--blue); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; animation: bounce 2s infinite 0.4s;">3</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth-right">
+            <div class="auth-form" id="loginForm">
+                <h2>تسجيل الدخول</h2>
+                <div class="form-group">
+                    <label for="loginEmail">البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">كلمة المرور</label>
+                    <input type="password" id="loginPassword" placeholder="أدخل كلمة المرور">
+                </div>
+                <button class="auth-btn" onclick="login()">
+                    <span>تسجيل الدخول</span>
+                </button>
+                <div class="auth-switch">
+                    ليس لديك حساب؟ <a href="#" onclick="showRegisterForm()">إنشاء حساب جديد</a>
+                </div>
+                <div class="barcode-login" style="text-align: center; margin-top: 1.5rem;">
+                    <p style="margin-bottom: 1rem;">أو قم بمسح الباركود الخاص بك</p>
+                    <button class="auth-btn" style="background: var(--dark);" onclick="startBarcodeScan()">
+                        <span>مسح الباركود</span>
+                    </button>
+                </div>
             </div>
             
-            <div class="auth-tabs">
-                <button class="tab-btn active" id="login-tab">تسجيل الدخول</button>
-                <button class="tab-btn" id="register-tab">إنشاء حساب</button>
-            </div>
-            
-            <form id="login-form" class="auth-form">
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <h2>إنشاء حساب جديد</h2>
                 <div class="form-group">
-                    <label for="login-email">البريد الإلكتروني</label>
-                    <input type="email" id="login-email" required>
+                    <label for="registerName">الاسم الكامل</label>
+                    <input type="text" id="registerName" placeholder="أدخل اسمك الكامل">
                 </div>
                 <div class="form-group">
-                    <label for="login-password">كلمة المرور</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit" class="auth-btn">دخول</button>
-            </form>
-            
-            <form id="register-form" class="auth-form hidden">
-                <div class="form-group">
-                    <label for="register-name">اسم الطالبة</label>
-                    <input type="text" id="register-name" required>
+                    <label for="registerEmail">البريد الإلكتروني</label>
+                    <input type="email" id="registerEmail" placeholder="أدخل بريدك الإلكتروني">
                 </div>
                 <div class="form-group">
-                    <label for="register-email">البريد الإلكتروني</label>
-                    <input type="email" id="register-email" required>
+                    <label for="registerPassword">كلمة المرور</label>
+                    <input type="password" id="registerPassword" placeholder="أنشئ كلمة مرور">
                 </div>
                 <div class="form-group">
-                    <label for="register-password">كلمة المرور</label>
-                    <input type="password" id="register-password" required>
+                    <label for="registerConfirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="أعد إدخال كلمة المرور">
                 </div>
-                <div class="form-group">
-                    <label for="register-avatar">اختيار الصورة الشخصية</label>
-                    <div class="avatar-options">
-                        <div class="avatar-option selected" data-avatar="1"><img src="avatar1.png" alt="Avatar 1"></div>
-                        <div class="avatar-option" data-avatar="2"><img src="avatar2.png" alt="Avatar 2"></div>
-                        <div class="avatar-option" data-avatar="3"><img src="avatar3.png" alt="Avatar 3"></div>
-                    </div>
+                <button class="auth-btn" onclick="register()">
+                    <span>إنشاء حساب</span>
+                </button>
+                <div class="auth-switch">
+                    لديك حساب بالفعل؟ <a href="#" onclick="showLoginForm()">تسجيل الدخول</a>
                 </div>
-                <button type="submit" class="auth-btn">إنشاء حساب</button>
-            </form>
-            
-            <div class="auth-footer">
-                <p>بالدخول أنتِ توافقين على <a href="#">شروط الاستخدام</a> و<a href="#">سياسة الخصوصية</a></p>
             </div>
         </div>
     </div>
-
-    <!-- الصفحة الرئيسية (ستظهر بعد التسجيل) -->
-    <div class="main-container hidden" id="main-container">
-        <!-- شريط التنقل -->
-        <nav class="navbar">
-            <div class="nav-left">
-                <img src="logo.png" alt="منصتي الرياضية" class="logo">
-                <span class="welcome-msg">مرحباً بكِ، <span id="username-display">آية</span>!</span>
-            </div>
-            <div class="nav-right">
-                <div class="profile">
-                    <img id="user-avatar" src="avatar1.png" alt="صورة المستخدمة">
-                    <span id="user-points">0 نقطة</span>
-                </div>
-                <button class="logout-btn">تسجيل خروج</button>
-            </div>
-        </nav>
+    
+    <!-- الواجهة الرئيسية بعد التسجيل -->
+    <div class="main-container" id="mainContainer">
+        <div class="floating-shapes">
+            <div class="shape shape-circle" style="width: 100px; height: 100px; background-color: var(--pink); top: 10%; left: 5%;"></div>
+            <div class="shape shape-triangle" style="top: 70%; left: 80%; animation-delay: 2s;"></div>
+            <div class="shape shape-square" style="width: 80px; height: 80px; background-color: var(--purple); top: 30%; left: 85%; animation-delay: 1s;"></div>
+            <div class="shape shape-circle" style="width: 60px; height: 60px; background-color: var(--blue); top: 80%; left: 15%; animation-delay: 3s;"></div>
+            <div class="shape shape-square" style="width: 120px; height: 120px; background-color: var(--green); top: 20%; left: 70%; animation-delay: 0.5s;"></div>
+        </div>
         
-        <!-- محتوى الصفحة الرئيسية -->
-        <main class="main-content">
-            <div class="hero-section">
-                <div class="hero-text">
-                    <h1 class="animate__animated animate__fadeInDown">الوحدة الثالثة: العمليات على الكسور العشرية</h1>
-                    <p class="animate__animated animate__fadeInUp animate__delay-1s">لنتعلم معاً بطريقة ممتعة!</p>
-                    <div class="progress-container animate__animated animate__fadeInUp animate__delay-2s">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% مكتمل</span>
-                    </div>
+        <header>
+            <div class="logo">
+                <div class="logo-icon">د</div>
+                <span>منصة د.غادة</span>
+            </div>
+            <div class="user-profile">
+                <span id="usernameDisplay">مرحباً!</span>
+                <div class="user-avatar" id="userAvatar" onclick="showProfileModal()">غ</div>
+            </div>
+        </header>
+        
+        <div class="welcome-message slide-in">
+            <h1>مرحباً <span id="welcomeUsername" class="text-gradient">عزيزتي الطالبة</span>!</h1>
+            <p>نرحب بكِ في منصة تعلم الكسور العشرية، حيث يمكنكِ إتقان العمليات الحسابية بطريقة سهلة وممتعة. اختر الدرس الذي تريدين البدء به من الأسفل واستمتعي بتجربة تعليمية فريدة!</p>
+        </div>
+        
+        <div class="lessons-container">
+            <div class="lesson-card" onclick="openLesson(1)">
+                <div class="lesson-tag">الدرس الأول</div>
+                <div class="lesson-image-container">
+                    <img src="https://i.ibb.co.com/0jQ7vJz/multiplication.jpg" alt="ضرب الكسور العشرية" class="lesson-image">
                 </div>
-                <div class="hero-image">
-                    <img src="math-girl.png" alt="طالبة تدرس الرياضيات" class="animate__animated animate__fadeInRight">
+                <div class="lesson-content">
+                    <h2 class="lesson-title">ضرب الكسور العشرية</h2>
+                    <p class="lesson-description">تعلمي طريقة ضرب الكسور العشرية بسهولة مع أمثلة تطبيقية وتفاعلية تساعدك على فهم المفهوم بشكل عملي. سوف تتعلمين كيفية حساب الناتج بدقة ووضع الفاصلة في المكان الصحيح.</p>
+                    <button class="start-button">
+                        <span>إبدأ التعلم الآن</span>
+                    </button>
                 </div>
             </div>
             
-            <div class="lessons-container">
-                <div class="lesson-card" id="multiplication-card" data-lesson="multiplication">
-                    <div class="card-header">
-                        <div class="lesson-icon">×</div>
-                        <div class="lesson-badge">جديد</div>
-                    </div>
-                    <div class="card-body">
-                        <h3>ضرب الكسور العشرية</h3>
-                        <p>تعلمي كيفية ضرب الكسور العشرية بسهولة</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <span>★</span>
-                            <span>★</span>
-                            <span>★</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                        </div>
-                        <button class="start-lesson-btn">ابدأ التعلم</button>
-                    </div>
-                    <div class="card-particles"></div>
+            <div class="lesson-card" onclick="openLesson(2)">
+                <div class="lesson-tag">الدرس الثاني</div>
+                <div class="lesson-image-container">
+                    <img src="https://i.ibb.co.com/4YQzJ7Y/division.jpg" alt="قسمة الكسور العشرية" class="lesson-image">
                 </div>
-                
-                <div class="lesson-card" id="division-card" data-lesson="division">
-                    <div class="card-header">
-                        <div class="lesson-icon">÷</div>
-                    </div>
-                    <div class="card-body">
-                        <h3>قسمة الكسور العشرية</h3>
-                        <p>إتقان عملية القسمة مع تمارين تفاعلية</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                        </div>
-                        <button class="start-lesson-btn">ابدأ التعلم</button>
-                    </div>
-                    <div class="card-particles"></div>
-                </div>
-                
-                <div class="lesson-card" id="measurement-card" data-lesson="measurement">
-                    <div class="card-header">
-                        <div class="lesson-icon">📏</div>
-                    </div>
-                    <div class="card-body">
-                        <h3>القياس وتطبيقات العمليات</h3>
-                        <p>تطبيقات عملية في الحياة اليومية</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                            <span>☆</span>
-                        </div>
-                        <button class="start-lesson-btn">ابدأ التعلم</button>
-                    </div>
-                    <div class="card-particles"></div>
+                <div class="lesson-content">
+                    <h2 class="lesson-title">قسمة الكسور العشرية</h2>
+                    <p class="lesson-description">شرح مفصل وعملي لقسمة الكسور العشرية مع تمارين متنوعة تتناسب مع جميع مستويات الفهم. تعلمي كيفية تحويل القسمة إلى ضرب باستخدام المقلوب وحل المسائل بخطوات واضحة.</p>
+                    <button class="start-button">
+                        <span>إبدأ التعلم الآن</span>
+                    </button>
                 </div>
             </div>
             
-            <div class="achievements-section">
-                <h2>إنجازاتكِ</h2>
-                <div class="achievements-grid">
-                    <div class="achievement locked">
-                        <div class="achievement-icon">🏆</div>
-                        <h4>أميرة الضرب</h4>
-                        <p>أكملي درس الضرب</p>
-                    </div>
-                    <div class="achievement locked">
-                        <div class="achievement-icon">🎓</div>
-                        <h4>خبيرة القسمة</h4>
-                        <p>حلّي جميع تمارين القسمة</p>
-                    </div>
-                    <div class="achievement locked">
-                        <div class="achievement-icon">✨</div>
-                        <h4>نجمة القياس</h4>
-                        <p>احرزي 100% في تطبيقات القياس</p>
-                    </div>
+            <div class="lesson-card" onclick="openLesson(3)">
+                <div class="lesson-tag">الدرس الثالث</div>
+                <div class="lesson-image-container">
+                    <img src="https://i.ibb.co.com/0XqY7vN/application.jpg" alt="تطبيقات عملية" class="lesson-image">
+                </div>
+                <div class="lesson-content">
+                    <h2 class="lesson-title">تطبيقات عملية</h2>
+                    <p class="lesson-description">اكتشفي كيف نستخدم الكسور العشرية في الحياة اليومية مثل القياسات المالية، والمسافات، والوزن. تعلمي حل المشكلات الواقعية باستخدام الكسور العشرية بطريقة ممتعة وتفاعلية.</p>
+                    <button class="start-button">
+                        <span>إبدأ التعلم الآن</span>
+                    </button>
                 </div>
             </div>
-        </main>
+        </div>
         
-        <!-- تذييل الصفحة -->
-        <footer class="main-footer">
-            <p>© 2023 منصتي الرياضية - تصميم خاص بالطالبات</p>
-            <div class="social-links">
-                <a href="#"><img src="facebook-icon.png" alt="فيسبوك"></a>
-                <a href="#"><img src="twitter-icon.png" alt="تويتر"></a>
-                <a href="#"><img src="instagram-icon.png" alt="إنستغرام"></a>
+        <div class="motivation-section" style="background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,240,246,0.9))); border-radius: 25px; padding: 3rem; margin: 4rem 0; text-align: center; position: relative; overflow: hidden; border: 3px solid rgba(255,107,157,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://i.ibb.co.com/4dGXvJg/math-icons.png') no-repeat center center; opacity: 0.05; z-index: 0;"></div>
+            <div style="position: relative; z-index: 1;">
+                <h2 style="font-size: 2rem; color: var(--purple); margin-bottom: 1.5rem; position: relative; display: inline-block;">
+                    <span style="position: relative;">رسالة خاصة من د.غادة</span>
+                    <span style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--pink), var(--purple)); border-radius: 4px;"></span>
+                </h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #555; margin-bottom: 1.5rem;">
+                        عزيزتي الطالبة، أريدك أن تعرفي أن الرياضيات ليست مجرد أرقام وحسابات، إنها لغة الكون الجميلة التي تساعدنا على فهم العالم من حولنا. كل عالمة عظيمة بدأت من حيث أنتِ الآن.
+                    </p>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #555; margin-bottom: 1.5rem;">
+                        قد تواجهين بعض التحديات في البداية، ولكن مع الممارسة والصبر ستجدين أن الكسور العشرية أصبحت سهلة وممتعة! تذكري أن كل خطوة تتعلمينها تقربكِ من تحقيق أحلامكِ.
+                    </p>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #555;">
+                        أنتِ قادرة على التميز، وأنا هنا لمساعدتكِ في كل خطوة على هذا الطريق. لنبدأ هذه الرحلة الممتعة معاً!
+                    </p>
+                </div>
             </div>
-        </footer>
+        </div>
     </div>
     
-    <!-- صفحة الدرس (ستظهر عند اختيار درس) -->
-    <div class="lesson-container hidden" id="lesson-container">
+    <!-- صفحة الملف الشخصي -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-content">
+            <span class="close-modal" onclick="hideProfileModal()">×</span>
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">غ</div>
+                <h3 class="profile-name" id="profileName">غادة</h3>
+                <p class="profile-email" id="profileEmail">gada@example.com</p>
+            </div>
+            
+            <div class="barcode-section">
+                <h4 class="barcode-title">باركود الدخول السريع</h4>
+                <svg id="userBarcode"></svg>
+                <p class="barcode-instructions">يمكنك استخدام هذا الباركود لتسجيل الدخول السريع دون الحاجة لإدخال البريد وكلمة المرور. احفظيه في مكان آمن أو اطبعيه لاستخدامه لاحقاً.</p>
+            </div>
+            
+            <div class="progress-section">
+                <h4 class="progress-title">تقدمك في الدروس</h4>
+                <div class="progress-item">
+                    <h4>
+                        <span>ضرب الكسور العشرية</span>
+                        <span class="progress-percent" id="progressPercent1">0%</span>
+                    </h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress1" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <h4>
+                        <span>قسمة الكسور العشرية</span>
+                        <span class="progress-percent" id="progressPercent2">0%</span>
+                    </h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress2" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <h4>
+                        <span>تطبيقات عملية</span>
+                        <span class="progress-percent" id="progressPercent3">0%</span>
+                    </h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress3" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="auth-btn" style="width: 100%; margin-top: 2rem;" onclick="logout()">
+                <span>تسجيل الخروج</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- صفحة الدرس 1: ضرب الكسور العشرية -->
+    <div class="lesson-page" id="lesson1Page">
         <div class="lesson-header">
-            <button class="back-btn">← العودة</button>
-            <h2 id="lesson-title">ضرب الكسور العشرية</h2>
-            <div class="lesson-progress">
-                <span id="lesson-progress-text">0/6 تمارين</span>
-                <div class="progress-bar small">
-                    <div class="progress-fill" style="width: 0%"></div>
+            <button class="back-button" onclick="backToMain()">
+                <span>←</span> العودة
+            </button>
+            <div class="progress-indicator" id="progressIndicator1">0%</div>
+        </div>
+        
+        <h1 class="lesson-title-page">ضرب الكسور العشرية</h1>
+        
+        <div class="lesson-tabs">
+            <div class="lesson-tab active" onclick="changeTab('lesson1', 1)">الشرح والأمثلة</div>
+            <div class="lesson-tab" onclick="changeTab('lesson1', 2)">التمارين التفاعلية</div>
+        </div>
+        
+        <div class="tab-content active" id="lesson1Tab1">
+            <div class="explanation-section">
+                <h3 class="section-title">شرح الدرس: ضرب الكسور العشرية</h3>
+                <p class="section-text">ضرب الكسور العشرية يشبه ضرب الأعداد الصحيحة، ولكن مع وضع الفاصلة العشرية في المكان الصحيح في الناتج. إليكِ الخطوات الأساسية:</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال توضيحي</h4>
+                    <p class="example-text">لنحسب ناتج ضرب <span class="animated-math">2<span class="decimal-point">.</span>5</span> × <span class="animated-math">3<span class="decimal-point">.</span>4</span></p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> تجاهلي الفواصل العشرية واضربي الأعداد كأنها أعداد صحيحة → <span class="operation-sign">25 × 34 = 850</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> عددي عدد الأرقام بعد الفاصلة في كل من العددين → في <span class="decimal-animation">2<span class="decimal-point">.</span>5</span> رقم واحد بعد الفاصلة، وفي <span class="decimal-animation">3<span class="decimal-point">.</span>4</span> رقم واحد بعد الفاصلة</div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> اجمعي عدد الأرقام بعد الفاصلة في العددين → <span class="operation-sign">1 + 1 = 2</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> ضعي الفاصلة في الناتج بحيث يكون بعدها نفس العدد الذي حصلت عليه → <span class="result-box">8.50</span></div>
+                        <div class="step"><span class="step-number">الخطوة 5:</span> يمكننا حذف الصفر من النهاية إذا كان على يمين الفاصلة → <span class="result-box">8.5</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال آخر</h4>
+                    <p class="example-text">لنحسب ناتج ضرب <span class="animated-math">0<span class="decimal-point">.</span>12</span> × <span class="animated-math">0<span class="decimal-point">.</span>3</span></p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> تجاهل الفواصل → <span class="operation-sign">12 × 3 = 36</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> عدد الأرقام بعد الفاصلة → في <span class="decimal-animation">0<span class="decimal-point">.</span>12</span> رقمين، في <span class="decimal-animation">0<span class="decimal-point">.</span>3</span> رقم واحد</div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> المجموع → <span class="operation-sign">2 + 1 = 3</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> ضع الفاصلة بحيث يكون بعدها 3 أرقام → <span class="result-box">0.036</span></div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 3rem;">جدول الضرب للكسور العشرية</h3>
+                <table class="math-table">
+                    <tr>
+                        <th>المسألة</th>
+                        <th>طريقة الحل</th>
+                        <th>الناتج</th>
+                    </tr>
+                    <tr>
+                        <td>0.5 × 0.2</td>
+                        <td>(5×2=10) ثم فاصلة بعد رقمين</td>
+                        <td>0.10 أو 0.1</td>
+                    </tr>
+                    <tr>
+                        <td>1.2 × 0.3</td>
+                        <td>(12×3=36) ثم فاصلة بعد رقمين</td>
+                        <td>0.36</td>
+                    </tr>
+                    <tr>
+                        <td>0.25 × 0.4</td>
+                        <td>(25×4=100) ثم فاصلة بعد 3 أرقام</td>
+                        <td>0.100 أو 0.1</td>
+                    </tr>
+                    <tr>
+                        <td>3.7 × 1.5</td>
+                        <td>(37×15=555) ثم فاصلة بعد رقمين</td>
+                        <td>5.55</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="exercise-section">
+                <h3 class="section-title">تدرب على الشرح</h3>
+                <p class="section-text">حاولي حل هذه الأمثلة بنفسك قبل رؤية الحل. اضغطي على زر "عرض خطوات الحل" عندما تنتهي للتحقق من إجابتك.</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 1</h4>
+                    <p class="example-text">احسبي ناتج ضرب <span class="animated-math">1<span class="decimal-point">.</span>5</span> × <span class="animated-math">2<span class="decimal-point">.</span>3</span></p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson1Steps1')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson1Steps1">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">15 × 23 = 345</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> عدد الأرقام بعد الفاصلة: <span class="operation-sign">1 + 1 = 2</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج: <span class="result-box">3.45</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 2</h4>
+                    <p class="example-text">احسبي ناتج ضرب <span class="animated-math">0<span class="decimal-point">.</span>04</span> × <span class="animated-math">0<span class="decimal-point">.</span>2</span></p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson1Steps2')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson1Steps2">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">4 × 2 = 8</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> عدد الأرقام بعد الفاصلة: <span class="operation-sign">2 + 1 = 3</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج: <span class="result-box">0.008</span></div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="lesson-content">
-            <div class="explanation-section">
-                <h3>شرح الدرس</h3>
-                <div class="explanation-content" id="explanation-content">
-                    <!-- سيتم ملؤه بالجافاسكريبت -->
-                </div>
-                <div class="explanation-animation">
-                    <div class="animation-box" id="animation-box">
-                        <!-- سيتم ملؤه بالجافاسكريبت -->
+        <div class="tab-content" id="lesson1Tab2">
+            <div class="exercise-section">
+                <h3 class="section-title">تمارين تفاعلية</h3>
+                <p class="section-text">حاولي حل التمارين التالية واختاري الإجابة الصحيحة. إذا واجهتكِ أي صعوبة، يمكنكِ استخدام خيار المساعدة.</p>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">1</div>
+                        <span>ما هو ناتج ضرب <span class="animated-math">3<span class="decimal-point">.</span>2</span> × <span class="animated-math">1<span class="decimal-point">.</span>5</span>؟</span>
                     </div>
-                </div>
-            </div>
-            
-            <div class="solved-exercises-section">
-                <h3>تمارين محلولة</h3>
-                <div class="solved-exercises" id="solved-exercises">
-                    <!-- سيتم ملؤه بالجافاسكريبت -->
-                </div>
-            </div>
-            
-            <div class="practice-section">
-                <h3>حان وقت التمرين!</h3>
-                <div class="exercise-container" id="exercise-container">
-                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '4.8', true, 'lesson1')">4.8</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '4.5', false, 'lesson1')">4.5</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '5.0', false, 'lesson1')">5.0</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson1Feedback1">
+                        <span style="font-weight: bold; color: var(--green-dark);">أحسنتِ!</span> الإجابة الصحيحة هي 4.8. لقد قمتِ بحل المسألة بشكل صحيح.
+                    </div>
+                    <div class="help-section" id="lesson1Help1">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson1HelpCalc1')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson1HelpCalc1">
+                            <p class="calculator-title">آلة حاسبة الضرب العشري</p>
+                            <input type="text" class="calculator-input" value="3.2 × 1.5" id="lesson1CalcInput1">
+                            <button class="calculator-btn" onclick="calculate('lesson1CalcInput1', 'lesson1CalcResult1', 'lesson1CalcSteps1')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson1CalcResult1"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson1CalcSteps1')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson1CalcSteps1"></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="calculator-help hidden" id="calculator-help">
-                    <h4>آلة حاسبة مساعدة</h4>
-                    <div class="calculator-input">
-                        <input type="text" id="calculator-expression" placeholder="أدخلي المسألة هنا، مثلاً: 0.5 × 0.3">
-                        <button id="calculate-btn">احسبي</button>
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">2</div>
+                        <span>ما هو ناتج ضرب <span class="animated-math">0<span class="decimal-point">.</span>7</span> × <span class="animated-math">0<span class="decimal-point">.</span>04</span>؟</span>
                     </div>
-                    <div class="calculator-options">
-                        <label>
-                            <input type="checkbox" id="show-steps-checkbox">
-                            أريدي خطوات الحل أيضًا
-                        </label>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '0.28', false, 'lesson1')">0.28</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '0.028', true, 'lesson1')">0.028</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '0.0028', false, 'lesson1')">0.0028</div>
                     </div>
-                    <div class="calculator-result hidden" id="calculator-result">
-                        <!-- سيتم ملؤه بالجافاسكريبت -->
+                    <div class="feedback-message correct-feedback" id="lesson1Feedback2">
+                        <span style="font-weight: bold; color: var(--green-dark);">رائعة!</span> الإجابة الصحيحة هي 0.028. لقد أحسنتِ وضع الفاصلة في المكان الصحيح.
+                    </div>
+                    <div class="help-section" id="lesson1Help2">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson1HelpCalc2')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson1HelpCalc2">
+                            <p class="calculator-title">آلة حاسبة الضرب العشري</p>
+                            <input type="text" class="calculator-input" value="0.7 × 0.04" id="lesson1CalcInput2">
+                            <button class="calculator-btn" onclick="calculate('lesson1CalcInput2', 'lesson1CalcResult2', 'lesson1CalcSteps2')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson1CalcResult2"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson1CalcSteps2')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson1CalcSteps2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">3</div>
+                        <span>إذا كان طول المستطيل <span class="animated-math">2<span class="decimal-point">.</span>5</span> سم وعرضه <span class="animated-math">1<span class="decimal-point">.</span>8</span> سم، فما هي مساحته؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '4.3', false, 'lesson1')">4.3</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '4.5', true, 'lesson1')">4.5</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '5.0', false, 'lesson1')">5.0</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson1Feedback3">
+                        <span style="font-weight: bold; color: var(--green-dark);">ممتازة!</span> الإجابة الصحيحة هي 4.5. مساحة المستطيل = الطول × العرض.
+                    </div>
+                    <div class="help-section" id="lesson1Help3">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson1HelpCalc3')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson1HelpCalc3">
+                            <p class="calculator-title">آلة حاسبة الضرب العشري</p>
+                            <input type="text" class="calculator-input" value="2.5 × 1.8" id="lesson1CalcInput3">
+                            <button class="calculator-btn" onclick="calculate('lesson1CalcInput3', 'lesson1CalcResult3', 'lesson1CalcSteps3')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson1CalcResult3"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson1CalcSteps3')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson1CalcSteps3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- العناصر العائمة -->
-    <div class="floating-elements">
-        <!-- سيتم إنشاؤها بالجافاسكريبت -->
+    <!-- صفحة الدرس 2: قسمة الكسور العشرية -->
+    <div class="lesson-page" id="lesson2Page">
+        <div class="lesson-header">
+            <button class="back-button" onclick="backToMain()">
+                <span>←</span> العودة
+            </button>
+            <div class="progress-indicator" id="progressIndicator2">0%</div>
+        </div>
+        
+        <h1 class="lesson-title-page">قسمة الكسور العشرية</h1>
+        
+        <div class="lesson-tabs">
+            <div class="lesson-tab active" onclick="changeTab('lesson2', 1)">الشرح والأمثلة</div>
+            <div class="lesson-tab" onclick="changeTab('lesson2', 2)">التمارين التفاعلية</div>
+        </div>
+        
+        <div class="tab-content active" id="lesson2Tab1">
+            <div class="explanation-section">
+                <h3 class="section-title">شرح الدرس: قسمة الكسور العشرية</h3>
+                <p class="section-text">لقسمة الكسور العشرية، يمكننا تحويل المقسوم عليه إلى عدد صحيح عن طريق ضرب كلا العددين في 10 أو 100 أو 1000 حسب الحاجة، ثم نقوم بالقسمة كالمعتاد.</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال توضيحي</h4>
+                    <p class="example-text">لنحسب ناتج قسمة <span class="animated-math">4<span class="decimal-point">.</span>5</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>5</span></p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> نضرب كلا العددين في 10 لتحويل المقسوم عليه إلى عدد صحيح → <span class="operation-sign">(4.5 × 10) ÷ (0.5 × 10) = 45 ÷ 5</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> نقوم بالقسمة كالمعتاد → <span class="operation-sign">45 ÷ 5 = 9</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج النهائي هو <span class="result-box">9</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال آخر</h4>
+                    <p class="example-text">لنحسب ناتج قسمة <span class="animated-math">1<span class="decimal-point">.</span>44</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>12</span></p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> نضرب كلا العددين في 100 لتحويل المقسوم عليه إلى عدد صحيح → <span class="operation-sign">(1.44 × 100) ÷ (0.12 × 100) = 144 ÷ 12</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> نقوم بالقسمة كالمعتاد → <span class="operation-sign">144 ÷ 12 = 12</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج النهائي هو <span class="result-box">12</span></div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 3rem;">طريقة أخرى: استخدام الكسور الاعتيادية</h3>
+                <p class="section-text">يمكن تحويل الكسور العشرية إلى كسور اعتيادية ثم القيام بالقسمة:</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال</h4>
+                    <p class="example-text">لحل <span class="animated-math">0<span class="decimal-point">.</span>6</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>2</span></p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> تحويل الكسور العشرية إلى كسور اعتيادية → <span class="operation-sign">0.6 = 6/10</span> و <span class="operation-sign">0.2 = 2/10</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> قسمة الكسرين → <span class="operation-sign">(6/10) ÷ (2/10) = (6/10) × (10/2) = 60/20</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> تبسيط الناتج → <span class="result-box">3</span></div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 3rem;">جدول قسمة الكسور العشرية</h3>
+                <table class="math-table">
+                    <tr>
+                        <th>المسألة</th>
+                        <th>طريقة الحل</th>
+                        <th>الناتج</th>
+                    </tr>
+                    <tr>
+                        <td>0.8 ÷ 0.2</td>
+                        <td>(8÷2=4) بعد الضرب في 10</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1.5 ÷ 0.5</td>
+                        <td>(15÷5=3) بعد الضرب في 10</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>2.4 ÷ 0.3</td>
+                        <td>(24÷3=8) بعد الضرب في 10</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>0.36 ÷ 0.04</td>
+                        <td>(36÷4=9) بعد الضرب في 100</td>
+                        <td>9</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="exercise-section">
+                <h3 class="section-title">تدرب على الشرح</h3>
+                <p class="section-text">حاولي حل هذه الأمثلة بنفسك قبل رؤية الحل. اضغطي على زر "عرض خطوات الحل" عندما تنتهي للتحقق من إجابتك.</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 1</h4>
+                    <p class="example-text">احسبي ناتج قسمة <span class="animated-math">3<span class="decimal-point">.</span>6</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>6</span></p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson2Steps1')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson2Steps1">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">(3.6 × 10) ÷ (0.6 × 10) = 36 ÷ 6</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> <span class="operation-sign">36 ÷ 6 = 6</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج: <span class="result-box">6</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 2</h4>
+                    <p class="example-text">احسبي ناتج قسمة <span class="animated-math">0<span class="decimal-point">.</span>45</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>05</span></p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson2Steps2')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson2Steps2">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">(0.45 × 100) ÷ (0.05 × 100) = 45 ÷ 5</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> <span class="operation-sign">45 ÷ 5 = 9</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> الناتج: <span class="result-box">9</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="lesson2Tab2">
+            <div class="exercise-section">
+                <h3 class="section-title">تمارين تفاعلية</h3>
+                <p class="section-text">حاولي حل التمارين التالية واختاري الإجابة الصحيحة. إذا واجهتكِ أي صعوبة، يمكنكِ استخدام خيار المساعدة.</p>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">1</div>
+                        <span>ما هو ناتج قسمة <span class="animated-math">2<span class="decimal-point">.</span>4</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>3</span>؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '0.8', false, 'lesson2')">0.8</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '8', true, 'lesson2')">8</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '80', false, 'lesson2')">80</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson2Feedback1">
+                        <span style="font-weight: bold; color: var(--green-dark);">أحسنتِ!</span> الإجابة الصحيحة هي 8. لقد قمتِ بحل المسألة بشكل صحيح.
+                    </div>
+                    <div class="help-section" id="lesson2Help1">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson2HelpCalc1')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson2HelpCalc1">
+                            <p class="calculator-title">آلة حاسبة القسمة العشرية</p>
+                            <input type="text" class="calculator-input" value="2.4 ÷ 0.3" id="lesson2CalcInput1">
+                            <button class="calculator-btn" onclick="calculate('lesson2CalcInput1', 'lesson2CalcResult1', 'lesson2CalcSteps1')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson2CalcResult1"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson2CalcSteps1')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson2CalcSteps1"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">2</div>
+                        <span>ما هو ناتج قسمة <span class="animated-math">0<span class="decimal-point">.</span>56</span> ÷ <span class="animated-math">0<span class="decimal-point">.</span>07</span>؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '0.8', false, 'lesson2')">0.8</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '8', true, 'lesson2')">8</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '80', false, 'lesson2')">80</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson2Feedback2">
+                        <span style="font-weight: bold; color: var(--green-dark);">رائعة!</span> الإجابة الصحيحة هي 8. لقد أحسنتِ وضع الفاصلة في المكان الصحيح.
+                    </div>
+                    <div class="help-section" id="lesson2Help2">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson2HelpCalc2')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson2HelpCalc2">
+                            <p class="calculator-title">آلة حاسبة القسمة العشرية</p>
+                            <input type="text" class="calculator-input" value="0.56 ÷ 0.07" id="lesson2CalcInput2">
+                            <button class="calculator-btn" onclick="calculate('lesson2CalcInput2', 'lesson2CalcResult2', 'lesson2CalcSteps2')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson2CalcResult2"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson2CalcSteps2')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson2CalcSteps2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">3</div>
+                        <span>إذا كان لدى سارة <span class="animated-math">4<span class="decimal-point">.</span>5</span> متر من القماش وتريد قصه إلى قطع طول كل منها <span class="animated-math">0<span class="decimal-point">.</span>5</span> متر، فكم قطعة يمكنها الحصول عليها؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '9', true, 'lesson2')">9</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '90', false, 'lesson2')">90</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '0.9', false, 'lesson2')">0.9</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson2Feedback3">
+                        <span style="font-weight: bold; color: var(--green-dark);">ممتازة!</span> الإجابة الصحيحة هي 9. عدد القطع = الطول الكلي ÷ طول القطعة الواحدة.
+                    </div>
+                    <div class="help-section" id="lesson2Help3">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson2HelpCalc3')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson2HelpCalc3">
+                            <p class="calculator-title">آلة حاسبة القسمة العشرية</p>
+                            <input type="text" class="calculator-input" value="4.5 ÷ 0.5" id="lesson2CalcInput3">
+                            <button class="calculator-btn" onclick="calculate('lesson2CalcInput3', 'lesson2CalcResult3', 'lesson2CalcSteps3')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson2CalcResult3"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson2CalcSteps3')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson2CalcSteps3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <!-- الإشعارات -->
-    <div class="notification-container" id="notification-container">
-        <!-- سيتم ملؤه بالجافاسكريبت -->
+    <!-- صفحة الدرس 3: تطبيقات عملية -->
+    <div class="lesson-page" id="lesson3Page">
+        <div class="lesson-header">
+            <button class="back-button" onclick="backToMain()">
+                <span>←</span> العودة
+            </button>
+            <div class="progress-indicator" id="progressIndicator3">0%</div>
+        </div>
+        
+        <h1 class="lesson-title-page">تطبيقات عملية على الكسور العشرية</h1>
+        
+        <div class="lesson-tabs">
+            <div class="lesson-tab active" onclick="changeTab('lesson3', 1)">الشرح والأمثلة</div>
+            <div class="lesson-tab" onclick="changeTab('lesson3', 2)">التمارين التفاعلية</div>
+        </div>
+        
+        <div class="tab-content active" id="lesson3Tab1">
+            <div class="explanation-section">
+                <h3 class="section-title">شرح الدرس: تطبيقات عملية على الكسور العشرية</h3>
+                <p class="section-text">تستخدم الكسور العشرية في العديد من التطبيقات العملية في حياتنا اليومية مثل القياسات المالية، والمسافات، والوزن، والوقت. في هذا الدرس سنتعلم كيفية تطبيق عمليات الضرب والقسمة على الكسور العشرية في مواقف حياتية.</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال 1: التسوق</h4>
+                    <p class="example-text">اشترت سارة 3.5 كيلوغرام من التفاح بسعر 2.75 ريال للكيلوغرام الواحد. كم يجب أن تدفع؟</p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> نحدد العملية المطلوبة → <span class="operation-sign">الكمية × السعر = المبلغ الكلي</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> نضرب الكمية في السعر → <span class="operation-sign">3.5 × 2.75</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> نحول الأعداد إلى أعداد صحيحة → <span class="operation-sign">35 × 275 = 9625</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> نحدد مكان الفاصلة → <span class="operation-sign">رقمين بعد الفاصلة في العدد الأول + رقمين بعد الفاصلة في العدد الثاني = 4 أرقام</span></div>
+                        <div class="step"><span class="step-number">الخطوة 5:</span> الناتج النهائي → <span class="result-box">9.625 ريال</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال 2: القياسات</h4>
+                    <p class="example-text">إذا كان طول غرفة 4.8 متر وعرضها 3.2 متر، فما هي مساحة الأرضية؟</p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> نحدد العملية المطلوبة → <span class="operation-sign">الطول × العرض = المساحة</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> نضرب الطول في العرض → <span class="operation-sign">4.8 × 3.2</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> نحول الأعداد إلى أعداد صحيحة → <span class="operation-sign">48 × 32 = 1536</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> نحدد مكان الفاصلة → <span class="operation-sign">رقم بعد الفاصلة في العدد الأول + رقم بعد الفاصلة في العدد الثاني = رقمين</span></div>
+                        <div class="step"><span class="step-number">الخطوة 5:</span> الناتج النهائي → <span class="result-box">15.36 متر مربع</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">مثال 3: الوقت والسرعة</h4>
+                    <p class="example-text">إذا كانت سرعة سيارة 85.5 كم/ساعة، فكم تقطع في 2.5 ساعة؟</p>
+                    
+                    <div class="example-solution">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> نحدد العملية المطلوبة → <span class="operation-sign">السرعة × الزمن = المسافة</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> نضرب السرعة في الزمن → <span class="operation-sign">85.5 × 2.5</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> نحول الأعداد إلى أعداد صحيحة → <span class="operation-sign">855 × 25 = 21375</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> نحدد مكان الفاصلة → <span class="operation-sign">رقم بعد الفاصلة في العدد الأول + رقم بعد الفاصلة في العدد الثاني = رقمين</span></div>
+                        <div class="step"><span class="step-number">الخطوة 5:</span> الناتج النهائي → <span class="result-box">213.75 كم</span></div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 3rem;">جدول التطبيقات العملية</h3>
+                <table class="math-table">
+                    <tr>
+                        <th>التطبيق</th>
+                        <th>المسألة</th>
+                        <th>الحل</th>
+                    </tr>
+                    <tr>
+                        <td>التسوق</td>
+                        <td>2.5 كجم بسعر 3.4 ريال/كجم</td>
+                        <td>2.5 × 3.4 = 8.5 ريال</td>
+                    </tr>
+                    <tr>
+                        <td>المساحة</td>
+                        <td>غرفة 3.5 م × 4.2 م</td>
+                        <td>3.5 × 4.2 = 14.7 م²</td>
+                    </tr>
+                    <tr>
+                        <td>الوقت</td>
+                        <td>سرعة 60.5 كم/س لمدة 1.5 ساعة</td>
+                        <td>60.5 × 1.5 = 90.75 كم</td>
+                    </tr>
+                    <tr>
+                        <td>التوزيع</td>
+                        <td>توزيع 4.8 لتر عصير على 6 أكواب</td>
+                        <td>4.8 ÷ 6 = 0.8 لتر/كوب</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="exercise-section">
+                <h3 class="section-title">تدرب على الشرح</h3>
+                <p class="section-text">حاولي حل هذه الأمثلة بنفسك قبل رؤية الحل. اضغطي على زر "عرض خطوات الحل" عندما تنتهي للتحقق من إجابتك.</p>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 1</h4>
+                    <p class="example-text">اشترى أحمد 2.5 كيلوغرام من البرتقال بسعر 3.75 ريال للكيلوغرام. كم يجب أن يدفع؟</p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson3Steps1')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson3Steps1">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">2.5 × 3.75</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> <span class="operation-sign">25 × 375 = 9375</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> <span class="operation-sign">رقم بعد الفاصلة في العدد الأول + رقمين بعد الفاصلة في العدد الثاني = 3 أرقام</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> الناتج: <span class="result-box">9.375 ريال</span></div>
+                    </div>
+                </div>
+                
+                <div class="example-item">
+                    <h4 class="example-title">تمرين 2</h4>
+                    <p class="example-text">إذا كان طول ملعب 25.5 متر وعرضه 12.75 متر، فما هي مساحته؟</p>
+                    <button class="show-steps-btn" onclick="showSteps('lesson3Steps2')">
+                        <span>عرض خطوات الحل</span>
+                    </button>
+                    <div class="steps-solution" id="lesson3Steps2">
+                        <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">25.5 × 12.75</span></div>
+                        <div class="step"><span class="step-number">الخطوة 2:</span> <span class="operation-sign">255 × 1275 = 325125</span></div>
+                        <div class="step"><span class="step-number">الخطوة 3:</span> <span class="operation-sign">رقم بعد الفاصلة في العدد الأول + رقمين بعد الفاصلة في العدد الثاني = 3 أرقام</span></div>
+                        <div class="step"><span class="step-number">الخطوة 4:</span> الناتج: <span class="result-box">325.125 متر مربع</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="lesson3Tab2">
+            <div class="exercise-section">
+                <h3 class="section-title">تمارين تفاعلية</h3>
+                <p class="section-text">حاولي حل التمارين التالية واختاري الإجابة الصحيحة. إذا واجهتكِ أي صعوبة، يمكنكِ استخدام خيار المساعدة.</p>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">1</div>
+                        <span>إذا كان سعر كيلو الموز 4.25 ريال، فكم تبلغ تكلفة 3.5 كيلو؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '14.875', true, 'lesson3')">14.875 ريال</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '12.375', false, 'lesson3')">12.375 ريال</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '15.125', false, 'lesson3')">15.125 ريال</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson3Feedback1">
+                        <span style="font-weight: bold; color: var(--green-dark);">أحسنتِ!</span> الإجابة الصحيحة هي 14.875 ريال. التكلفة = الكمية × السعر.
+                    </div>
+                    <div class="help-section" id="lesson3Help1">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson3HelpCalc1')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson3HelpCalc1">
+                            <p class="calculator-title">آلة حاسبة التطبيقات العملية</p>
+                            <input type="text" class="calculator-input" value="3.5 × 4.25" id="lesson3CalcInput1">
+                            <button class="calculator-btn" onclick="calculate('lesson3CalcInput1', 'lesson3CalcResult1', 'lesson3CalcSteps1')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson3CalcResult1"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson3CalcSteps1')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson3CalcSteps1"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">2</div>
+                        <span>إذا قطع سيار مسافة 127.5 كم في 1.5 ساعة، فما هي سرعته المتوسطة؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '85', true, 'lesson3')">85 كم/س</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '75', false, 'lesson3')">75 كم/س</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '95', false, 'lesson3')">95 كم/س</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson3Feedback2">
+                        <span style="font-weight: bold; color: var(--green-dark);">رائعة!</span> الإجابة الصحيحة هي 85 كم/س. السرعة = المسافة ÷ الزمن.
+                    </div>
+                    <div class="help-section" id="lesson3Help2">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson3HelpCalc2')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson3HelpCalc2">
+                            <p class="calculator-title">آلة حاسبة التطبيقات العملية</p>
+                            <input type="text" class="calculator-input" value="127.5 ÷ 1.5" id="lesson3CalcInput2">
+                            <button class="calculator-btn" onclick="calculate('lesson3CalcInput2', 'lesson3CalcResult2', 'lesson3CalcSteps2')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson3CalcResult2"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson3CalcSteps2')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson3CalcSteps2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <div class="exercise-question">
+                        <div class="exercise-question-number">3</div>
+                        <span>إذا أرادت مريم توزيع 6.75 لتر من العصير على 9 أطفال بالتساوي، فكم لتراً سيحصل كل طفل؟</span>
+                    </div>
+                    <div class="exercise-options">
+                        <div class="option-btn" onclick="checkAnswer(this, '0.75', true, 'lesson3')">0.75 لتر</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '0.85', false, 'lesson3')">0.85 لتر</div>
+                        <div class="option-btn" onclick="checkAnswer(this, '0.65', false, 'lesson3')">0.65 لتر</div>
+                    </div>
+                    <div class="feedback-message correct-feedback" id="lesson3Feedback3">
+                        <span style="font-weight: bold; color: var(--green-dark);">ممتازة!</span> الإجابة الصحيحة هي 0.75 لتر. كمية العصير لكل طفل = الكمية الكلية ÷ عدد الأطفال.
+                    </div>
+                    <div class="help-section" id="lesson3Help3">
+                        <button class="help-btn" onclick="showCalculatorHelp('lesson3HelpCalc3')">
+                            <span>أحتاج مساعدة في الحل</span>
+                        </button>
+                        <div class="calculator-help" id="lesson3HelpCalc3">
+                            <p class="calculator-title">آلة حاسبة التطبيقات العملية</p>
+                            <input type="text" class="calculator-input" value="6.75 ÷ 9" id="lesson3CalcInput3">
+                            <button class="calculator-btn" onclick="calculate('lesson3CalcInput3', 'lesson3CalcResult3', 'lesson3CalcSteps3')">
+                                <span>احسب</span>
+                            </button>
+                            <div class="calculator-result" id="lesson3CalcResult3"></div>
+                            <button class="show-steps-btn" onclick="showSteps('lesson3CalcSteps3')">
+                                <span>عرض خطوات الحل</span>
+                            </button>
+                            <div class="steps-solution" id="lesson3CalcSteps3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <script src="script.js"></script>
+    <!-- رسالة التهنئة -->
+    <div class="celebration" id="celebration">
+        <div class="celebration-content">
+            <h2>أحسنتِ!</h2>
+            <p>لقد أكملتِ التمرين بنجاح. أنتِ تتقدمين بشكل رائع، استمري في التعلم!</p>
+            <button class="celebration-btn" onclick="hideCelebration()">
+                <span>متابعة</span>
+            </button>
+        </div>
+        
+        <!-- عناصر الكونفيتي -->
+        <div id="confettiContainer"></div>
+    </div>
+    
+    <footer>
+        <p>منصة تعليمية تفاعلية من <span class="creator">إعداد د.غادة</span></p>
+    </footer>
+    
+    <script>
+        // بيانات المستخدم
+        let currentUser = null;
+        let userProgress = {
+            lesson1: 0,
+            lesson2: 0,
+            lesson3: 0
+        };
+        
+        // إنشاء أشكال عائمة
+        function createFloatingShapes() {
+            const container = document.querySelector('.floating-shapes');
+            const shapes = ['circle', 'triangle', 'square'];
+            const colors = ['var(--pink)', 'var(--purple)', 'var(--blue)', 'var(--green)', 'var(--yellow)'];
+            
+            for (let i = 0; i < 10; i++) {
+                const shape = document.createElement('div');
+                const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.floor(Math.random() * 60) + 20;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const duration = Math.floor(Math.random() * 20) + 10;
+                const delay = Math.random() * 5;
+                
+                shape.classList.add('shape', `shape-${shapeType}`);
+                shape.style.width = `${size}px`;
+                shape.style.height = shapeType === 'triangle' ? '0' : `${size}px`;
+                shape.style.backgroundColor = color;
+                shape.style.top = `${top}%`;
+                shape.style.left = `${left}%`;
+                shape.style.animationDuration = `${duration}s`;
+                shape.style.animationDelay = `${delay}s`;
+                
+                if (shapeType === 'triangle') {
+                    shape.style.borderBottom = `${size}px solid ${color}`;
+                    shape.style.borderLeft = `${size/2}px solid transparent`;
+                    shape.style.borderRight = `${size/2}px solid transparent`;
+                }
+                
+                container.appendChild(shape);
+            }
+        }
+        
+        // إنشاء الكونفيتي
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                
+                // أشكال متنوعة للكونفيتي
+                if (i % 3 === 0) {
+                    confetti.style.borderRadius = '50%';
+                } else if (i % 3 === 1) {
+                    confetti.style.width = '8px';
+                    confetti.style.height = '15px';
+                } else {
+                    confetti.style.transform = 'rotate(45deg)';
+                }
+                
+                container.appendChild(confetti);
+            }
+        }
+        
+        // عرض نموذج التسجيل
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            
+            // تأثير حركي للنموذج
+            anime({
+                targets: '#registerForm',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                easing: 'easeOutExpo'
+            });
+        }
+        
+        // عرض نموذج الدخول
+        function showLoginForm() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            
+            // تأثير حركي للنموذج
+            anime({
+                targets: '#loginForm',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                easing: 'easeOutExpo'
+            });
+        }
+        
+        // تسجيل الدخول
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
+                return;
+            }
+            
+            // في التطبيق الحقيقي، هنا سيتم التحقق من قاعدة البيانات
+            currentUser = {
+                name: "غادة",
+                email: email,
+                firstLetter: "غ"
+            };
+            
+            // توليد باركود عشوائي للمستخدم
+            const barcodeValue = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            currentUser.barcode = barcodeValue;
+            
+            // تأثير حركي للانتقال
+            anime({
+                targets: '#authContainer',
+                opacity: 0,
+                translateY: -50,
+                duration: 500,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('authContainer').style.display = 'none';
+                    document.getElementById('mainContainer').style.display = 'block';
+                    
+                    anime({
+                        targets: '#mainContainer',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
+                }
+            });
+            
+            // تحديث بيانات المستخدم
+            document.getElementById('welcomeUsername').textContent = currentUser.name;
+            document.getElementById('usernameDisplay').textContent = currentUser.name;
+            document.getElementById('userAvatar').textContent = currentUser.firstLetter;
+            
+            // توليد الباركود
+            JsBarcode("#userBarcode", barcodeValue, {
+                format: "CODE128",
+                lineColor: "#9d6bff",
+                width: 2,
+                height: 60,
+                displayValue: false
+            });
+            
+            // إنشاء الأشكال العائمة
+            createFloatingShapes();
+        }
+        
+        // إنشاء حساب جديد
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (!name || !email || !password || !confirmPassword) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('كلمة المرور غير متطابقة');
+                return;
+            }
+            
+            // في التطبيق الحقيقي، هنا سيتم حفظ البيانات في قاعدة البيانات
+            currentUser = {
+                name: name,
+                email: email,
+                firstLetter: name.charAt(0)
+            };
+            
+            // توليد باركود عشوائي للمستخدم
+            const barcodeValue = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            currentUser.barcode = barcodeValue;
+            
+            // تأثير حركي للانتقال
+            anime({
+                targets: '#authContainer',
+                opacity: 0,
+                translateY: -50,
+                duration: 500,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('authContainer').style.display = 'none';
+                    document.getElementById('mainContainer').style.display = 'block';
+                    
+                    anime({
+                        targets: '#mainContainer',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
+                }
+            });
+            
+            // تحديث بيانات المستخدم
+            document.getElementById('welcomeUsername').textContent = currentUser.name;
+            document.getElementById('usernameDisplay').textContent = currentUser.name;
+            document.getElementById('userAvatar').textContent = currentUser.firstLetter;
+            
+            // توليد الباركود
+            JsBarcode("#userBarcode", barcodeValue, {
+                format: "CODE128",
+                lineColor: "#9d6bff",
+                width: 2,
+                height: 60,
+                displayValue: false
+            });
+            
+            // إنشاء الأشكال العائمة
+            createFloatingShapes();
+            
+            // رسالة ترحيبية
+            setTimeout(() => {
+                alert(`مرحباً ${name}! تم إنشاء حسابك بنجاح. يمكنك الآن استخدام الباركود الخاص بك للدخول السريع في المرة القادمة.`);
+            }, 500);
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            // تأثير حركي للانتقال
+            anime({
+                targets: '#mainContainer, #lesson1Page, #lesson2Page, #lesson3Page',
+                opacity: 0,
+                translateY: 50,
+                duration: 500,
+                easing: 'easeInExpo',
+                complete: function() {
+                    currentUser = null;
+                    document.getElementById('mainContainer').style.display = 'none';
+                    document.getElementById('lesson1Page').style.display = 'none';
+                    document.getElementById('lesson2Page').style.display = 'none';
+                    document.getElementById('lesson3Page').style.display = 'none';
+                    document.getElementById('authContainer').style.display = 'flex';
+                    document.getElementById('loginForm').style.display = 'block';
+                    document.getElementById('registerForm').style.display = 'none';
+                    hideProfileModal();
+                    
+                    anime({
+                        targets: '#authContainer',
+                        opacity: [0, 1],
+                        translateY: [-50, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
+                }
+            });
+        }
+        
+        // عرض ملف التعريف
+        function showProfileModal() {
+            if (!currentUser) return;
+            
+            document.getElementById('profileModal').style.display = 'flex';
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileAvatar').textContent = currentUser.firstLetter;
+            
+            // تحديث التقدم
+            document.getElementById('progress1').style.width = userProgress.lesson1 + '%';
+            document.getElementById('progress2').style.width = userProgress.lesson2 + '%';
+            document.getElementById('progress3').style.width = userProgress.lesson3 + '%';
+            document.getElementById('progressPercent1').textContent = userProgress.lesson1 + '%';
+            document.getElementById('progressPercent2').textContent = userProgress.lesson2 + '%';
+            document.getElementById('progressPercent3').textContent = userProgress.lesson3 + '%';
+            
+            // تأثير حركي للنافذة
+            anime({
+                targets: '.profile-content',
+                scale: [0.9, 1],
+                opacity: [0, 1],
+                duration: 500,
+                easing: 'easeOutExpo'
+            });
+        }
+        
+        // إخفاء ملف التعريف
+        function hideProfileModal() {
+            // تأثير حركي للنافذة
+            anime({
+                targets: '.profile-content',
+                scale: [1, 0.9],
+                opacity: [1, 0],
+                duration: 300,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('profileModal').style.display = 'none';
+                }
+            });
+        }
+        
+        // محاكاة مسح الباركود
+        function startBarcodeScan() {
+            alert('في التطبيق الحقيقي، سيتم فتح الكاميرا لمسح الباركود. الآن سنحاكي عملية المسح.');
+            
+            // محاكاة مسح الباركود التجريبي
+            setTimeout(() => {
+                currentUser = {
+                    name: "غادة",
+                    email: "gada@example.com",
+                    firstLetter: "غ",
+                    barcode: "DEMO123456"
+                };
+                
+                // تأثير حركي للانتقال
+                anime({
+                    targets: '#authContainer',
+                    opacity: 0,
+                    translateY: -50,
+                    duration: 500,
+                    easing: 'easeInExpo',
+                    complete: function() {
+                        document.getElementById('authContainer').style.display = 'none';
+                        document.getElementById('mainContainer').style.display = 'block';
+                        
+                        anime({
+                            targets: '#mainContainer',
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            duration: 800,
+                            easing: 'easeOutExpo'
+                        });
+                    }
+                });
+                
+                document.getElementById('welcomeUsername').textContent = currentUser.name;
+                document.getElementById('usernameDisplay').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.firstLetter;
+                
+                JsBarcode("#userBarcode", currentUser.barcode, {
+                    format: "CODE128",
+                    lineColor: "#9d6bff",
+                    width: 2,
+                    height: 60,
+                    displayValue: false
+                });
+                
+                // إنشاء الأشكال العائمة
+                createFloatingShapes();
+                
+                alert('تم التعرف على الباركود بنجاح! مرحباً بعودتك ' + currentUser.name);
+            }, 1500);
+        }
+        
+        // فتح الدرس
+        function openLesson(lessonNumber) {
+            // تأثير حركي للانتقال
+            anime({
+                targets: '#mainContainer',
+                opacity: 0,
+                translateY: 50,
+                duration: 500,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('mainContainer').style.display = 'none';
+                    document.getElementById('lesson1Page').style.display = 'none';
+                    document.getElementById('lesson2Page').style.display = 'none';
+                    document.getElementById('lesson3Page').style.display = 'none';
+                    
+                    const lessonPage = `lesson${lessonNumber}Page`;
+                    document.getElementById(lessonPage).style.display = 'block';
+                    
+                    anime({
+                        targets: `#${lessonPage}`,
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
+                    
+                    // تحديث مؤشر التقدم
+                    updateProgressIndicator(lessonNumber);
+                }
+            });
+        }
+        
+        // العودة للواجهة الرئيسية
+        function backToMain() {
+            // تأثير حركي للانتقال
+            anime({
+                targets: '#lesson1Page, #lesson2Page, #lesson3Page',
+                opacity: 0,
+                translateY: 50,
+                duration: 500,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('lesson1Page').style.display = 'none';
+                    document.getElementById('lesson2Page').style.display = 'none';
+                    document.getElementById('lesson3Page').style.display = 'none';
+                    document.getElementById('mainContainer').style.display = 'block';
+                    
+                    anime({
+                        targets: '#mainContainer',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
+                    });
+                }
+            });
+        }
+        
+        // تغيير التبويبات
+        function changeTab(lesson, tabNumber) {
+            // إخفاء جميع التبويبات
+            document.querySelectorAll(`#${lesson}Page .lesson-tab`).forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll(`#${lesson}Page .tab-content`).forEach(content => content.classList.remove('active'));
+            
+            // إظهار التبويب المحدد
+            document.querySelector(`#${lesson}Page .lesson-tab:nth-child(${tabNumber})`).classList.add('active');
+            document.getElementById(`${lesson}Tab${tabNumber}`).classList.add('active');
+            
+            // تأثير حركي للتبويب
+            anime({
+                targets: `#${lesson}Tab${tabNumber}`,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                easing: 'easeOutExpo'
+            });
+        }
+        
+        // عرض خطوات الحل
+        function showSteps(id) {
+            const steps = document.getElementById(id);
+            
+            if (steps.style.display === 'block') {
+                anime({
+                    targets: `#${id}`,
+                    opacity: [1, 0],
+                    height: [steps.scrollHeight, 0],
+                    duration: 300,
+                    easing: 'easeInExpo',
+                    complete: function() {
+                        steps.style.display = 'none';
+                    }
+                });
+            } else {
+                steps.style.display = 'block';
+                anime({
+                    targets: `#${id}`,
+                    opacity: [0, 1],
+                    height: [0, steps.scrollHeight],
+                    duration: 500,
+                    easing: 'easeOutExpo'
+                });
+            }
+        }
+        
+        // التحقق من الإجابة
+        function checkAnswer(button, answer, isCorrect, lesson) {
+            // إعادة تعيين جميع الأزرار
+            const allButtons = button.parentElement.querySelectorAll('.option-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('correct', 'wrong');
+            });
+            
+            // تحديد الإجابة المختارة
+            if (isCorrect) {
+                button.classList.add('correct');
+                
+                // عرض رسالة التغذية الراجعة
+                const feedbackId = button.closest('.exercise-item').querySelector('.feedback-message').id;
+                document.getElementById(feedbackId).style.display = 'block';
+                
+                // إخفاء قسم المساعدة
+                const helpId = button.closest('.exercise-item').querySelector('.help-section').id;
+                document.getElementById(helpId).style.display = 'none';
+                
+                // عرض رسالة التهنئة
+                showCelebration();
+                
+                // تحديث التقدم
+                updateProgress(lesson);
+            } else {
+                button.classList.add('wrong');
+                
+                // عرض قسم المساعدة
+                const helpId = button.closest('.exercise-item').querySelector('.help-section').id;
+                document.getElementById(helpId).style.display = 'block';
+                
+                // تأثير اهتزاز للإجابة الخاطئة
+                anime({
+                    targets: button,
+                    translateX: [-10, 10, -10, 10, 0],
+                    duration: 500,
+                    elasticity: 500
+                });
+            }
+        }
+        
+        // عرض مساعدة الآلة الحاسبة
+        function showCalculatorHelp(id) {
+            const helpCalc = document.getElementById(id);
+            
+            if (helpCalc.style.display === 'block') {
+                anime({
+                    targets: `#${id}`,
+                    opacity: [1, 0],
+                    height: [helpCalc.scrollHeight, 0],
+                    duration: 300,
+                    easing: 'easeInExpo',
+                    complete: function() {
+                        helpCalc.style.display = 'none';
+                    }
+                });
+            } else {
+                helpCalc.style.display = 'block';
+                anime({
+                    targets: `#${id}`,
+                    opacity: [0, 1],
+                    height: [0, helpCalc.scrollHeight],
+                    duration: 500,
+                    easing: 'easeOutExpo'
+                });
+            }
+        }
+        
+        // حساب الناتج
+        function calculate(inputId, resultId, stepsId) {
+            const input = document.getElementById(inputId).value;
+            let result = '';
+            let steps = '';
+            
+            if (input.includes('×') || input.includes('*')) {
+                // ضرب الأعداد
+                const numbers = input.split(/×|\*/).map(num => parseFloat(num.trim()));
+                result = numbers[0] * numbers[1];
+                
+                steps = `
+                    <div class="step"><span class="step-number">الخطوة 1:</span> <span class="operation-sign">${numbers[0]} × ${numbers[1]} = ${result}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 2:</span> عدد الأرقام بعد الفاصلة في العدد الأول: <span class="operation-sign">${(numbers[0].toString().split('.')[1] || '').length}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 3:</span> عدد الأرقام بعد الفاصلة في العدد الثاني: <span class="operation-sign">${(numbers[1].toString().split('.')[1] || '').length}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 4:</span> المجموع: <span class="operation-sign">${(numbers[0].toString().split('.')[1] || '').length + (numbers[1].toString().split('.')[1] || '').length}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 5:</span> لذلك نضع الفاصلة بحيث يكون بعدها <span class="operation-sign">${(numbers[0].toString().split('.')[1] || '').length + (numbers[1].toString().split('.')[1] || '').length}</span> أرقام</div>
+                    <div class="step"><span class="step-number">الخطوة 6:</span> الناتج النهائي: <span class="result-box">${(result / Math.pow(10, (numbers[0].toString().split('.')[1] || '').length + (numbers[1].toString().split('.')[1] || '').length)).toFixed((numbers[0].toString().split('.')[1] || '').length + (numbers[1].toString().split('.')[1] || '').length)}</span></div>
+                `;
+            } else if (input.includes('÷') || input.includes('/')) {
+                // قسمة الأعداد
+                const numbers = input.split(/÷|\//).map(num => parseFloat(num.trim()));
+                result = numbers[0] / numbers[1];
+                
+                steps = `
+                    <div class="step"><span class="step-number">الخطوة 1:</span> لحل <span class="operation-sign">${numbers[0]} ÷ ${numbers[1]}:</span></div>
+                    <div class="step"><span class="step-number">الخطوة 2:</span> نضرب كلا العددين في <span class="operation-sign">${Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)}</span> لتحويل المقسوم عليه إلى عدد صحيح</div>
+                    <div class="step"><span class="step-number">الخطوة 3:</span> <span class="operation-sign">(${numbers[0]} × ${Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)}) ÷ (${numbers[1]} × ${Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)}) = ${numbers[0] * Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)} ÷ ${numbers[1] * Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 4:</span> نقوم بالقسمة كالمعتاد → <span class="operation-sign">${numbers[0] * Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)} ÷ ${numbers[1] * Math.pow(10, (numbers[1].toString().split('.')[1] || '').length)} = ${result}</span></div>
+                    <div class="step"><span class="step-number">الخطوة 5:</span> الناتج النهائي: <span class="result-box">${result}</span></div>
+                `;
+            } else {
+                result = 'الرجاء إدخال مسألة صحيحة (استخدمي × للضرب أو ÷ للقسمة)';
+            }
+            
+            document.getElementById(resultId).innerHTML = '<strong>الناتج:</strong> ' + result;
+            document.getElementById(resultId).style.display = 'block';
+            document.getElementById(stepsId).innerHTML = steps;
+            
+            // تأثير حركي للنتيجة
+            anime({
+                targets: `#${resultId}`,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                easing: 'easeOutExpo'
+            });
+        }
+        
+        // عرض رسالة التهنئة
+        function showCelebration() {
+            createConfetti();
+            document.getElementById('celebration').style.display = 'flex';
+            
+            // تأثير حركي لرسالة التهنئة
+            anime({
+                targets: '.celebration-content',
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                duration: 800,
+                easing: 'easeOutElastic'
+            });
+        }
+        
+        // إخفاء رسالة التهنئة
+        function hideCelebration() {
+            // تأثير حركي لرسالة التهنئة
+            anime({
+                targets: '.celebration-content',
+                scale: [1, 0.8],
+                opacity: [1, 0],
+                duration: 300,
+                easing: 'easeInExpo',
+                complete: function() {
+                    document.getElementById('celebration').style.display = 'none';
+                }
+            });
+        }
+        
+        // تحديث التقدم
+        function updateProgress(lesson) {
+            // في التطبيق الحقيقي، سيتم حفظ التقدم في قاعدة البيانات
+            if (lesson === 'lesson1') {
+                userProgress.lesson1 = Math.min(userProgress.lesson1 + 10, 100);
+                document.getElementById('progress1').style.width = userProgress.lesson1 + '%';
+                document.getElementById('progressPercent1').textContent = userProgress.lesson1 + '%';
+                document.getElementById('progressIndicator1').textContent = userProgress.lesson1 + '%';
+            } else if (lesson === 'lesson2') {
+                userProgress.lesson2 = Math.min(userProgress.lesson2 + 10, 100);
+                document.getElementById('progress2').style.width = userProgress.lesson2 + '%';
+                document.getElementById('progressPercent2').textContent = userProgress.lesson2 + '%';
+                document.getElementById('progressIndicator2').textContent = userProgress.lesson2 + '%';
+            } else if (lesson === 'lesson3') {
+                userProgress.lesson3 = Math.min(userProgress.lesson3 + 10, 100);
+                document.getElementById('progress3').style.width = userProgress.lesson3 + '%';
+                document.getElementById('progressPercent3').textContent = userProgress.lesson3 + '%';
+                document.getElementById('progressIndicator3').textContent = userProgress.lesson3 + '%';
+            }
+            
+            // تأثير حركي لشريط التقدم
+            anime({
+                targets: '.progress-fill',
+                width: ['0%', '100%'],
+                duration: 1000,
+                easing: 'easeOutExpo',
+                elasticity: 500
+            });
+        }
+        
+        // تحديث مؤشر التقدم
+        function updateProgressIndicator(lessonNumber) {
+            let progress = 0;
+            
+            if (lessonNumber === 1) {
+                progress = userProgress.lesson1;
+                document.getElementById('progressIndicator1').textContent = progress + '%';
+            } else if (lessonNumber === 2) {
+                progress = userProgress.lesson2;
+                document.getElementById('progressIndicator2').textContent = progress + '%';
+            } else if (lessonNumber === 3) {
+                progress = userProgress.lesson3;
+                document.getElementById('progressIndicator3').textContent = progress + '%';
+            }
+        }
+        
+        // تهيئة الباركود التجريبي
+        window.onload = function() {
+            JsBarcode("#demoBarcode", "DEMO123456", {
+                format: "CODE128",
+                lineColor: "#9d6bff",
+                width: 2,
+                height: 60,
+                displayValue: false
+            });
+            
+            // تأثيرات حركية عند التحميل
+            anime({
+                targets: '.auth-left h1, .auth-left p',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 1000,
+                delay: anime.stagger(200),
+                easing: 'easeOutExpo'
+            });
+            
+            anime({
+                targets: '.demo-barcode-container',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 800,
+                delay: 800,
+                easing: 'easeOutElastic'
+            });
+            
+            anime({
+                targets: '.auth-form',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 800,
+                delay: 300,
+                easing: 'easeOutExpo'
+            });
+        };
+    </script>
 </body>
 </html>
