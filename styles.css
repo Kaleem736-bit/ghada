@@ -1,0 +1,1002 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f9f3ff;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* شاشة التسجيل */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+    padding: 20px;
+}
+
+.auth-box {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23e0c3fc" stroke-width="0.5"/></svg>');
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-header .logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+.auth-header h2 {
+    color: #6a3093;
+    font-size: 1.5rem;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    color: #6a3093;
+    font-weight: bold;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #6a3093;
+    border-radius: 3px 3px 0 0;
+}
+
+.auth-form {
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+    outline: none;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #9c27b0, #6a3093);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    background: linear-gradient(to right, #8e24aa, #5e2d82);
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+}
+
+.avatar-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.avatar-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.avatar-option.selected {
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+}
+
+.avatar-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-footer a {
+    color: #6a3093;
+    text-decoration: none;
+}
+
+/* الصفحة الرئيسية */
+.main-container {
+    display: none;
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-left .logo {
+    height: 40px;
+}
+
+.welcome-msg {
+    font-weight: bold;
+    color: #6a3093;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #e0c3fc;
+}
+
+#user-points {
+    background: #f0e5ff;
+    color: #6a3093;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.logout-btn {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'Tajawal', sans-serif;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    border-color: #9c27b0;
+    color: #9c27b0;
+}
+
+.main-content {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #f0e5ff, #ffffff);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-text h1 {
+    color: #6a3093;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.progress-container {
+    margin-top: 30px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #9c27b0, #6a3093);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.hero-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
+.lessons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.lesson-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.lesson-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #e0c3fc, #d3a6ff);
+    color: white;
+}
+
+.lesson-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lesson-badge {
+    background: #ff9800;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h3 {
+    color: #6a3093;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.card-body p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.stars span {
+    color: #ffc107;
+    font-size: 1.2rem;
+}
+
+.stars span:last-child {
+    margin-right: 0;
+}
+
+.start-lesson-btn {
+    background: linear-gradient(to right, #9c27b0, #6a3093);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.start-lesson-btn:hover {
+    background: linear-gradient(to right, #8e24aa, #5e2d82);
+    box-shadow: 0 3px 10px rgba(156, 39, 176, 0.3);
+}
+
+.card-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.achievements-section {
+    margin-top: 40px;
+}
+
+.achievements-section h2 {
+    color: #6a3093;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.achievement {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    opacity: 0.5;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement::after {
+    content: '🔒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    opacity: 0.3;
+}
+
+.achievement.unlocked {
+    opacity: 1;
+    background: linear-gradient(135deg, #f0e5ff, #ffffff);
+}
+
+.achievement.unlocked::after {
+    display: none;
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.achievement h4 {
+    color: #6a3093;
+    margin-bottom: 5px;
+}
+
+.achievement p {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-links img {
+    width: 25px;
+    height: 25px;
+    opacity: 0.6;
+    transition: all 0.3s;
+}
+
+.social-links img:hover {
+    opacity: 1;
+}
+
+/* صفحة الدرس */
+.lesson-container {
+    display: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lesson-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #6a3093;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+#lesson-title {
+    color: #6a3093;
+    font-size: 1.5rem;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.lesson-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#lesson-progress-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.progress-bar.small {
+    width: 100px;
+    height: 8px;
+}
+
+.lesson-content {
+    margin-top: 30px;
+}
+
+.explanation-section, .solved-exercises-section, .practice-section {
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.explanation-section h3, .solved-exercises-section h3, .practice-section h3 {
+    color: #6a3093;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.explanation-content {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.explanation-animation {
+    background: #f9f3ff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation-box {
+    width: 100%;
+    height: 100%;
+}
+
+.solved-exercises {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.solved-exercise {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 4px solid #9c27b0;
+}
+
+.solved-exercise h4 {
+    color: #6a3093;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.solved-exercise .exercise-question {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.solved-exercise .exercise-solution {
+    background: #f0e5ff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.solved-exercise .exercise-solution::before {
+    content: 'الحل:';
+    font-weight: bold;
+    color: #6a3093;
+    margin-left: 5px;
+}
+
+.exercise-step {
+    margin-top: 10px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.exercise-step::before {
+    content: '→';
+    position: absolute;
+    right: 0;
+    color: #9c27b0;
+}
+
+.practice-section {
+    position: relative;
+}
+
+.exercise-container {
+    background: #f9f3ff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.exercise-question {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid #e0c3fc;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.option-btn:hover {
+    background: #f0e5ff;
+}
+
+.option-btn.correct {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+.option-btn.incorrect {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+}
+
+.help-btn {
+    background: none;
+    border: none;
+    color: #6a3093;
+    font-family: 'Tajawal', sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.calculator-help {
+    margin-top: 20px;
+    background: #f0e5ff;
+    border-radius: 10px;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.calculator-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.calculator-input input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #d3a6ff;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+}
+
+.calculator-input input:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+}
+
+#calculate-btn {
+    background: linear-gradient(to right, #9c27b0, #6a3093);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#calculate-btn:hover {
+    background: linear-gradient(to right, #8e24aa, #5e2d82);
+}
+
+.calculator-options {
+    margin-bottom: 15px;
+}
+
+.calculator-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #555;
+}
+
+.calculator-result {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    border-left: 4px solid #9c27b0;
+}
+
+.calculator-result h5 {
+    color: #6a3093;
+    margin-bottom: 10px;
+}
+
+.calculator-result .final-answer {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #4caf50;
+    margin: 10px 0;
+}
+
+.calculator-result .calculation-steps {
+    margin-top: 15px;
+}
+
+.calculation-step {
+    margin-bottom: 8px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.calculation-step::before {
+    content: '•';
+    position: absolute;
+    right: 0;
+    color: #9c27b0;
+}
+
+/* العناصر العائمة */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.float-element {
+    position: absolute;
+    font-size: 1.2rem;
+    color: rgba(156, 39, 176, 0.1);
+    animation: floatAround 20s infinite linear;
+}
+
+/* الإشعارات */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 90%;
+}
+
+.notification {
+    background: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideIn 0.5s ease, fadeOut 0.5s ease 2.5s forwards;
+    border-left: 5px solid #4caf50;
+}
+
+.notification.error {
+    border-left-color: #f44336;
+}
+
+.notification.warning {
+    border-left-color: #ff9800;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notification-message {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #888;
+}
+
+/* الرسوم المتحركة */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes floatAround {
+    0% { 
+        transform: translate(0, 0) rotate(0deg); 
+        opacity: 0;
+    }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { 
+        transform: translate(100px, 100px) rotate(360deg); 
+        opacity: 0;
+    }
+}
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .nav-left, .nav-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text {
+        order: 2;
+    }
+    
+    .hero-image {
+        order: 1;
+    }
+    
+    .lesson-card {
+        min-width: 100%;
+    }
+    
+    .options-container {
+        grid-template-columns: 1fr;
+    }
+}
